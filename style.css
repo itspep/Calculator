@@ -43,7 +43,7 @@ body{
     flex-direction:row;
     }
     
-    .cell, .on, .off, .equal, .minus, .divide, .plus, .times, .dot, .clear{
+    .cell, .on, .off, .equal, .operator, .dot, .clear{
     padding: 25px;
     flex-basis:25%;
     }

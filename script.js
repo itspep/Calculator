@@ -1,13 +1,14 @@
 //get the html elements
-const cells=document.querySelector(".cell");//individual squares (numbers, operators)
+const cells=document.querySelectorAll(".cell");//individual squares (numbers, operators)
 const input=document.getElementById("myInput"); //input element
 const onButton=document.querySelector(".on"); //for when the user turn on the calculator
-const ofButton=document.querySelector("off"); //for when the user turn off the calculator
+const offButton=document.querySelector(".off"); //for when the user turn off the calculator
 const clear=document.querySelector(".clear"); //for clearing everything and starting over
-const plus=document.querySelector(".plus"); //for addition
+/*const plus=document.querySelector(".plus"); //for addition
 const times=document.querySelector(".times"); //for multiplication
 const minus=document.querySelector(".minus"); //for subtractioln
-const divide=document.querySelector(".divide"); //for division
+const divide=document.querySelector(".divide");*/ //for division
+const operators=document.querySelectorAll(".operator")
 const dot=document.querySelector(".dot");//for the dot
 const equal=document.querySelector(".equal"); //for the equal symbol
 const myFooter=document.querySelector(".myFooter"); //for the footer
@@ -30,12 +31,45 @@ function times(num1, num2){
 function divide(num1, num2){
     return num1/num2;
 }
-//create the various evenListeners for these functions
+//create the various eventListeners for these functions
 //num1 for the first number
-cells.addEventListener("click", (event)=>{
-    num1+=event.target.textContent;
-});
-//num2 for the second number
-cells.addEventListener("click", (event)=>{
-    num2+=event.target.textContent;
-});
+cells.forEach((cell) => {
+    cell.addEventListener("click", (event) => {
+      num1 += event.target.textContent;
+    });
+  });
+  
+  //num2 for the second number
+  cells.forEach((cell) => {
+    cell.addEventListener("click", (event) => {
+      num2 += event.target.textContent;
+      //display the inputed data
+      
+    });
+  });
+  operators.forEach((operator) => {
+    operator.addEventListener("click", (event) => {
+      // perform calculation and update input field
+    });
+  });
+
+//eventListeners for other buttons (clear, dot, equal, on, off)
+clear.addEventListener("click", () => {
+    // clear input field and reset variables
+  });
+  
+  dot.addEventListener("click", () => {
+    // add decimal point to input field
+  });
+  
+  equal.addEventListener("click", () => {
+    // perform calculation and update input field
+  });
+  
+  onButton.addEventListener("click", () => {
+    // turn on calculator
+  });
+  
+  offButton.addEventListener("click", () => {
+    // turn off calculator
+  });
