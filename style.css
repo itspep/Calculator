@@ -9,7 +9,7 @@ body{
     flex-direction: column;
     width:375px;
     height: auto;
-    background-color: aqua;
+    background-color: silver;
     flex-wrap:wrap;
     align-items: center;
     justify-content: center;
