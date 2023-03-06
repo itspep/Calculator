@@ -36,6 +36,7 @@ function divide(num1, num2){
 cells.forEach((cell) => {
     cell.addEventListener("click", (event) => {
       num1 += event.target.textContent;
+      input.innerText="num1";
     });
   });
   
@@ -44,22 +45,27 @@ cells.forEach((cell) => {
     cell.addEventListener("click", (event) => {
       num2 += event.target.textContent;
       //display the inputed data
-      
+      input.innerText+="num2";
     });
   });
+  let myOperator;
   operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
       // perform calculation and update input field
+    myOperator=event.target.textContent;
+    input.innerText+="myOperator";
     });
   });
 
 //eventListeners for other buttons (clear, dot, equal, on, off)
 clear.addEventListener("click", () => {
     // clear input field and reset variables
+    input.textContent="";
   });
   
   dot.addEventListener("click", () => {
     // add decimal point to input field
+    
   });
   
   equal.addEventListener("click", () => {
