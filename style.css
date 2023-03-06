@@ -1,11 +1,27 @@
 .container{
     display:flex;
     flex-direction: column;
-    width:400px;
+    width:375px;
     height: auto;
     background-color: aqua;
     flex-wrap:wrap;
+
 }
 .display{
     display: flex;
+    flex-wrap: wrap;
+}
+.display input[type="text"]{
+    font-size: 30px;
+    text-align: right;
+}
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    flex-direction:row;
+}
+.cell{
+    padding: 15px;
+    flex-basis:25%;
 }
