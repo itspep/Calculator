@@ -3,8 +3,9 @@ body{
     align-items: center;
     justify-content: center;
     margin-top: 50px;
-}
-.container{
+    }
+    
+    .container{
     display:flex;
     flex-direction: column;
     width:375px;
@@ -14,33 +15,35 @@ body{
     align-items: center;
     justify-content: center;
     border-radius: 30px;
-}
-.top{
+    }
+    
+    .top{
     padding: 15px;
-    font-size: larger;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.display{
+    font: large 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+    .display{
     display: flex;
     flex-wrap: wrap;
     border-radius: 30px;
-}
-.display input[type="text"]{
+    }
+    
+    .display input[type="text"]{
     font-size: 30px;
     text-align: right;
     border-radius: 30px;
     width: 80%;
     margin-left: 10%;
+    }
     
-}
-.buttons{
+    .buttons{
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
     flex-direction:row;
-}
-.cell{
+    }
+    
+    .cell, .on, .off, .equal, .minus, .divide, .plus, .times, .dot, .clear{
     padding: 25px;
     flex-basis:25%;
-}
-
+    }
