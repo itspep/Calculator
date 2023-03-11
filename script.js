@@ -1,20 +1,16 @@
 //get the html elements
-const cells=document.querySelectorAll(".cell");//individual squares (numbers, operators)
-const input=document.getElementById("myInput"); //input element
-const onButton=document.querySelector(".on"); //for when the user turn on the calculator
-const offButton=document.querySelector(".off"); //for when the user turn off the calculator
-const clear=document.querySelector(".clear"); //for clearing everything and starting over
-/*const plus=document.querySelector(".plus"); //for addition
-const times=document.querySelector(".times"); //for multiplication
-const minus=document.querySelector(".minus"); //for subtractioln
-const divide=document.querySelector(".divide");*/ //for division
-const operators=document.querySelectorAll(".operator")
-const dot=document.querySelector(".dot");//for the dot
-const equal=document.querySelector(".equal"); //for the equal symbol
-const myFooter=document.querySelector(".myFooter"); //for the footer
+const buttons=document.querySelectorAll("button");//individual squares (numbers, operators)
+const finalOutput=document.getElementById("finalResult"); //to display final results
+const rawOutput=document.getElementById("rawResult"); //to display user entery
+const offButton=document.getElementById("off"); //for when the user turn off the calculator
+const onButton=document.getElementById("on"); //for when the user turn on the calculator
 //defining the variables to hold the values or elements from above
+let rawNum="";
+let rawData="";
 let num1="";
 let num2="";
+let rawResult;
+let finalDisplay;
 //create the function for addition
 function add(num1, num2){
     return num1+num2;
@@ -31,51 +27,145 @@ function times(num1, num2){
 function divide(num1, num2){
     return num1/num2;
 }
-//create the various eventListeners for these functions
-//num1 for the first number
-cells.forEach((cell) => {
-    cell.addEventListener("click", (event) => {
-      num1 += event.target.textContent;
-      input.innerText="num1";
-    });
-  });
-  
-  //num2 for the second number
-  cells.forEach((cell) => {
-    cell.addEventListener("click", (event) => {
-      num2 += event.target.textContent;
-      //display the inputed data
-      input.innerText+="num2";
-    });
-  });
-  let myOperator;
-  operators.forEach((operator) => {
-    operator.addEventListener("click", (event) => {
-      // perform calculation and update input field
-    myOperator=event.target.textContent;
-    input.innerText+="myOperator";
-    });
-  });
 
-//eventListeners for other buttons (clear, dot, equal, on, off)
-clear.addEventListener("click", () => {
-    // clear input field and reset variables
-    input.textContent="";
-  });
-  
-  dot.addEventListener("click", () => {
-    // add decimal point to input field
-    
-  });
-  
-  equal.addEventListener("click", () => {
-    // perform calculation and update input field
-  });
-  
-  onButton.addEventListener("click", () => {
-    // turn on calculator
-  });
-  
-  offButton.addEventListener("click", () => {
-    // turn off calculator
-  });
+function getData(event){
+  let num="";
+  if(event.key===undefined){
+    num=this.id;
+  }
+  else{
+    num=event.key;
+  }
+  switch(num){
+    case '0':
+      resetOutput();
+      if(!overScreen()){
+        rawNum+='0';
+      }
+      break;
+    case '1':
+      resetOutput();
+      if(!overScreen()){
+        rawNum+='1';
+      }
+      break;
+    case '2':
+      resetOutput();
+    if(!overScreen()){
+      rawNum+='2';
+    }
+    break;
+  case '3':
+    resetOutput();
+    if(!overScreen()){
+      rawNum+='3';
+    }
+    break;
+  case '4':
+    resetOutput();
+    if(!overscreen()){
+      rawNum+='4';
+    }
+    break;
+  case '5':
+    resetOutput();
+    if(!overScreen()){
+      rawDisplay+='5';
+    }
+    break;
+  case '6':
+    resetOutput();
+    if(!overScreen()){
+      rawNum+='6';
+    }
+    break;
+  case '7':
+    resetOutput();
+    if(!overScreen()){
+      rawNum+='7';
+    }
+    break;
+  case '8':
+    resetOutput();
+    if(!overScreen()){
+      rawNum+='8';
+    }
+    break;
+  case '9':
+    resetOutput();
+    if(!overScreen()){
+      rawNum+='9';
+    }
+    break;
+  case '&times;':
+  case '*':
+  case 'x':
+  case 'X':
+    if(!overScreen() && !operator()){
+      setRawDisplay();
+      rawData+="&times"
+      rawNum+='';
+    }
+    else return;
+    break;
+  case "&divide;":
+  case '/':
+      if(!overScreen() && !operator()){
+        setRawDisplay();
+        rawData+='\u00F7';
+        rawNum='';
+      }
+      else return;
+      break
+    case "&plus;":
+    case '+':
+      if(!overScreen() && !operator()){
+        setRawDisplay();
+        rawData+='+';
+        rawNum='';
+      }
+      else return;
+      break;
+    case '-':
+    case "&minus;":
+      if(!overScreen() && !operator()){
+        setRawDisplay();
+        rawData+='-';
+        rawNum='';
+      }
+      else return;
+      break;
+    case '.':
+      if(rawDisplay.length==0){
+        rawNum+="0.";
+      }
+      else if(!overScreen() && !period()){
+        rawNum+='.';
+      }
+      break;
+    case "AC":
+    case "Delete":
+    case "Escape":
+    case "clear":
+      resetOutput();
+      rawData="";
+      rawNum="";
+      break;
+    case 'C':
+    case "Backspace":
+      resetOutput();
+      backspace();
+      break;
+    case '=':
+    case "Enter":
+    case "equals":
+      setRawDisplay();
+      if(validEquation()){
+      setCalculator();
+      rawNum=rawResult;
+    }
+    else return;
+  }
+rawOutput.textContent = rawNum;   
+
+}

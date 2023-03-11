@@ -8,36 +8,39 @@
     <title>Calculator</title>
 </head>
 <body>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <div class="container">
         <header class="top">A SIMPLE CALCULATOR</header>
-        <div class="display">
-            <input type="text" id="myInput" placeholder="0" disabled>
+        <div class="display">        
+			<output class="userInput" type="text" id="finalResult"></output>	
+			<output class="userInput" type="text" id="rawResult"></output>
         </div>
         <div class="buttons">
-            <button class="on">ON</button>
-            <button class="off">OFF</button>
-            <button class="cell">&larr;</button>
-            <button class="clear">Clear</button>
-            <button class="cell">7</button>
-            <button class="cell">8</button>
-            <button class="cell">9</button>
-            <button class="operator">&plus;</button>
-            <button class="cell">4</button>
-            <button class="cell">5</button>
-            <button class="cell">6</button>
-            <button class="operator">&times;</button>
-            <button class="cell">1</button>
-            <button class="cell">2</button>
-            <button class="cell">3</button>
-            <button class="operator">&minus;</button>
-            <button class="dot" style="font-size: 30px;">.</button>
-            <button class="cell">0</button>
-            <button class="operator">&divide;</button>
-            <button class="equal">=</button>
+            <button class="operator" type="button" id="on">ON</button>
+            <button class="operator" type="button" id="off">OFF</button>
+            <button class="operator" data-key="8" id="Backspace" type="button">C;</button>
+            <button class="operator" data-key="127" id="clear" type="button">AC</button>
+            <button class="number" data-key="55" id="7" type="button">7</button>
+            <button class="number" data-key="56" id="8" type="button">8</button>
+            <button class="number" data-key="57" id="9" type="button">9</button>
+            <button class="operator" data-key="43" id="+" type="button">&plus;</button>
+            <button class="number" data-key="52" id="4" type="button">4</button>
+            <button class="number" data-key="53" id="5" type="button">5</button>
+            <button class="number" data-key="54" id="6" type="button">6</button>
+            <button class="operator" data-key="42" id="X" type="button">&times;</button>
+            <button class="number" data-key="49" id="1" type="button">1</button>
+            <button class="number" data-key="50" id="2" type="button">2</button>
+            <button class="number" data-key="51" id="3" type="button">3</button>
+            <button class="operator" data-key="45" id="-" type="button">&minus;</button>
+            <button class="number" data-key="190" id="period" type="button" >.</button>
+            <button class="number" data-key="53" id="0" type="button">0</button>
+            <button class="operator" data-key="47" id="/" type="button">&divide;</button>
+            <button class="operator" data-key="61" id="=" type="button">=</button>
            
         </div>
-        <footer class="myFooter"></footer>
+        <footer class="myFooter">
+            <p>itspep&copy;<script>document.write(new Date().getFullYear());</script></p>
+        </footer>
     </div>
 </body>
 </html>
