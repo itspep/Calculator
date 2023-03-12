@@ -10,7 +10,7 @@ let rawData="";
 let num1="";
 let num2="";
 let rawResult;
-let finalDisplay;
+let finalDisplay="";
 //create the function for addition
 function add(num1, num2){
     return num1+num2;
@@ -102,7 +102,7 @@ function getData(event){
   case 'x':
   case 'X':
     if(!overScreen() && !operator()){
-      setRawDisplay();
+      setFinalDisplay();
       rawData+="&times"
       rawNum+='';
     }
@@ -111,7 +111,7 @@ function getData(event){
   case "&divide;":
   case '/':
       if(!overScreen() && !operator()){
-        setRawDisplay();
+        setFinalDisplay();
         rawData+='\u00F7';
         rawNum='';
       }
@@ -120,7 +120,7 @@ function getData(event){
     case "&plus;":
     case '+':
       if(!overScreen() && !operator()){
-        setRawDisplay();
+        setFinalDisplay();
         rawData+='+';
         rawNum='';
       }
@@ -129,7 +129,7 @@ function getData(event){
     case '-':
     case "&minus;":
       if(!overScreen() && !operator()){
-        setRawDisplay();
+        setFinalDisplay();
         rawData+='-';
         rawNum='';
       }
@@ -167,5 +167,68 @@ function getData(event){
     else return;
   }
 rawOutput.textContent = rawNum;   
-
+displayRawData();
 }
+//determine the number of figures that can be displayed at one time
+function overScreen(){
+  if (rawNum.length>=12 || rawData>=45){
+    const exponentiation=toExponentialNotation(rawNum);
+    return true;
+  }
+  else return false;
+}
+//set the operator function to determine if the number already has an operator
+function operator(){
+  if(rawNum.length !=0 || rawData.charAt(rawData.length-1).match(/[\d\.]/)){
+    return false;
+  }
+  else return true;
+}
+//set a divide by zero function to determine if a user is about to divide by zero
+function divisionByZero(){
+  if(rawData.charAt(rawData.length-2).match(/\//) && rawNum.length==0){
+    return true;
+  } 
+  else return false; 
+}
+//set the backspace functions
+function backspace(){
+  //check to see if there is a raw number, then delete it first
+  if(rawNum>=1){
+    let rawNumArray=rawNum.split('');
+    rawNumArray.pop();
+    let rawNumString=rawNumArray.join('');
+    rawNum=rawNumString;
+  }
+  else{
+    let rawDataArray=rawData.split('');
+    //check to see if there is a space at the end
+    if(rawDataArray.length>=1 && rawDataArray[rawDataArray.length-1].match(/\s/)){
+      rawDataArray.pop();
+      rawDataArray.pop();
+      rawDataArray.pop();
+    }
+    else{
+      rawDataArray.pop();
+    }
+    let rawDataString=rawDataArray.join('');
+    rawData=rawDataString;
+  }
+}
+//set the function for the final display
+function setFinalDisplay(){
+  if(finalDisplay.length==0){
+    rawData+=rawNum;
+  }
+  else{
+    rawData=rawNum;
+    finalDisplay="";
+  }
+}
+//define a function to clear the final display results
+function clearFinalDisplay(){
+  if(finalDisplay !=0){
+    finalDisplay="";
+  }
+}
+//
