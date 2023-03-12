@@ -159,20 +159,20 @@ function getData(event){
     case '=':
     case "Enter":
     case "equals":
-      setRawDisplay();
-      if(validEquation()){
+      setFinalDisplay();
+      if(setValidEquation()){
       setCalculator();
       rawNum=rawResult;
     }
     else return;
   }
 rawOutput.textContent = rawNum;   
-displayRawData();
+setRawDisplay();
 }
 //determine the number of figures that can be displayed at one time
 function overScreen(){
   if (rawNum.length>=12 || rawData>=45){
-    const exponentiation=toExponentialNotation(rawNum);
+    exponentiation();
     return true;
   }
   else return false;
@@ -231,4 +231,45 @@ function clearFinalDisplay(){
     finalDisplay="";
   }
 }
-//
+//a function to determine if the equation is a valid one or not
+function setValidEquation(){
+  if(rawData.charAt(rawData.length-1).match(/\d/)){
+    return true;
+  }
+  else return false;
+}
+//set the calculation
+function setCalculator(){
+  let rawDataArray=rawData.split('');
+  finalDisplay=rawDataArray.join('');
+  makeCalculation();
+}
+//make the calcualtion
+function makeCalculation(){
+  if(finalDisplay.match(/\*|\//)){
+    multiplyOrDivide();
+  }
+  else if(finalDisplay.match(/[\s][\+|\-][\s]/)){
+    addOrSubtract();
+  }
+  else if(finalDisplay.length>12){
+    formatFinalDisplay();
+    return finalDisplay;
+  }
+  else return finalDisplay;
+}
+function multiplyOrDivide(){
+  let formular=/(\-?)[\d]+(\.?)[\d]*[\s][\*|\/][\s](\-?)[\d]+(\.?)[\d]*/;
+  let formularMatch=finalDisplay.match(formular)[0];
+  //determine wether the operator is a multiplication or division
+  let timesordivision=formularMatch.match(/\*|\//)[0];
+  //find the first number or operand
+  let firstNumber = /(\-?)[\d]+(\.?)[\d]*/g;
+  num1=formularMatch
+}
+
+
+
+function exponentiation(){
+  const exponentiation=toExponentialNotation(rawNum);
+}
